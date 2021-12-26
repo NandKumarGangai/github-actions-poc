@@ -119,3 +119,37 @@ build-app:
 - name: Setup finish
   run: echo 'Build created.'
 ```
+
+### GITHUB SECRETS
+
+- GOTO repo > settings > secrets > Add your env/secret variables.
+- Github allows the access the secrets via `secrets` object.
+It includes all the variables added in above step.
+- You can access the secrets at any level at job level or at command level.
+
+```yml
+runs-on: ubuntu-latest
+env:
+  PROJECT_ID: ${{ secrets.PROJECT_ID }}
+  TOKEN: ${{ secrets.TOKEN }}
+```
+
+- To access these secrets you can use it as below.
+
+```yml
+- name: Setup env variables
+  run: echo "{\"project_id\": \"$PROJECT_ID\", \"token\": \"$TOKEN\"}" > test.json
+```
+
+- You can access these secrets in package.json file too.
+
+- **Jobs** by default runs parallely so if your job is dependent on other job you need to specify it externally.
+- `needs` key is used to specify on which job the current job depend.
+
+```yml
+build-app:
+  ...
+test-app:
+  needs: build-app
+  ....
+```

@@ -14,3 +14,8 @@ jobs:
       run: npm run build
     - name: Setup finish
       run: echo 'Build created.'
+  test-app:
+    needs: build-app
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Test dependent job"
