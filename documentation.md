@@ -153,3 +153,19 @@ test-app:
   needs: build-app
   ....
 ```
+
+### Sharing data between two jobs
+
+```yml
+build_app:
+  outputs:
+      text: ${{ steps.finished.outputs.text }}
+  ....
+    - name: Setup finish
+      id: finished
+      run: echo "::set-output name=text::hello-world-from-build-job"
+test_app:
+  env:
+      BUILD_JOB_OUTPUT: ${{needs.build_app.outputs.text }}
+  ....
+```
