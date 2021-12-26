@@ -75,3 +75,19 @@ jobs:
       - run: echo "Hello world..."
       - run: echo "Second hello world..."
 ```
+
+## Adding actions/checkout@v2
+
+- This action checks-out your repository under `$GITHUB_WORKSPACE`, so your workflow can access it.
+- Only a single commit is fetched by default, for the ref/SHA that triggered the workflow.
+
+```yml
+name: My First Github Action
+on: [push]
+jobs:
+  build-app:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: echo "Hello world..."
+```
