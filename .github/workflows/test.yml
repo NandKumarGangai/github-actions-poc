@@ -1,0 +1,37 @@
+name: My First Github Action
+on: [push]
+jobs:
+  build_app:
+    runs-on: ubuntu-latest
+    outputs:
+      text: ${{ steps.finished.outputs.text }}
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v2
+      with:
+        node-version: '14.17.0'
+    - name: Install packages
+      run: npm i
+    - name: Build a project
+      run: npm run build
+    - name: Deploy a project
+      env:
+        user_name: 'github-actions[bot]'
+        user_email: 'github-actions[bot]@users.noreply.github.com'
+        github_token: ${{ secrets.ACCESS_TOKEN }}
+        repository: ${{ github.repository }}
+      run: |
+        git config user.name $user_name
+        git config user.email $user_email
+        git remote set-url origin https://${github_token}@github.com/${repository}
+        npm run deploy
+    - name: Setup finish
+      id: finished
+      run: echo "::set-output name=text::hello-world-from-build-job"
+  test-app:
+    needs: build_app
+    runs-on: ubuntu-latest
+    env:
+      BUILD_JOB_OUTPUT: ${{needs.build_app.outputs.text }}
+    steps:
+      - run: echo $BUILD_JOB_OUTPUT
