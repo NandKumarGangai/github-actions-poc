@@ -14,17 +14,14 @@ jobs:
       run: npm i
     - name: Build a project
       run: npm run build
-    - name: Deploy a project
+    - name: Deploy project to Netlify
+      uses: netlify/actions/cli@master
       env:
-        user_name: 'github-actions[bot]'
-        user_email: 'github-actions[bot]@users.noreply.github.com'
-        github_token: ${{ secrets.ACCESS_TOKEN }}
-        repository: ${{ github.repository }}
-      run: |
-        git config user.name $user_name
-        git config user.email $user_email
-        git remote set-url origin https://${github_token}@github.com/${repository}
-        npm run deploy
+        AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
+        SITE_ID: ${{ secrets.SITE_ID }}
+      with:
+        args: deploy --dir:dist --prod
+        secrets: '["AUTH_TOKEN", "SITE_ID"]'
     - name: Setup finish
       id: finished
       run: echo "::set-output name=text::hello-world-from-build-job"

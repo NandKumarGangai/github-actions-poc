@@ -1,10 +1,10 @@
 {
   "name": "github-actions",
-  "homepage": "https://nandkumargangai.github.io/github-actions-poc",
+  "homepage": "https://nandkumargangai.github.io/github-actions-poc/",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "rm -rf ./dist && tsc && vite build",
     "preview": "vite preview",
     "deploy": "gh-pages -d dist"
   },
