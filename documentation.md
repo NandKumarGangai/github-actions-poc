@@ -91,3 +91,17 @@ jobs:
       - uses: actions/checkout@v2
       - run: echo "Hello world..."
 ```
+
+## Setup node js action
+
+```yml
+...
+build-app:
+  runs-on: ubuntu-latest
+  steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v2
+      with:
+        node-version: '14.17.0'
+    - run: node -v
+```
