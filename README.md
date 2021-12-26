@@ -1,5 +1,7 @@
 # Vite PWA
 
+[![My First Github Action](https://github.com/NandKumarGangai/github-actions-poc/actions/workflows/test.yml/badge.svg)](https://github.com/NandKumarGangai/github-actions-poc/actions/workflows/test.yml)
+
 Welcome to your new PWA, powered by [Vite](https://vitejs.dev/), [Vite Plugin PWA](https://github.com/antfu/vite-plugin-pwa), and [Workbox](https://developers.google.com/web/tools/workbox)! There are three main commands for you to run to start developing your PWA:
 
 - `npm run dev` - Run the development server to develop your PWA
