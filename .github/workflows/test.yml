@@ -8,4 +8,9 @@ jobs:
     - uses: actions/setup-node@v2
       with:
         node-version: '14.17.0'
-    - run: node -v
+    - name: Install packages
+      run: npm i
+    - name: Build a project
+      run: npm run build
+    - name: Setup finish
+      run: echo 'Build created.'

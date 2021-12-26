@@ -105,3 +105,17 @@ build-app:
         node-version: '14.17.0'
     - run: node -v
 ```
+
+### Writing build action
+
+- Install the packages
+- Build the project
+
+```yml
+- name: Install packages
+  run: npm i
+- name: Build a project
+  run: npm run build
+- name: Setup finish
+  run: echo 'Build created.'
+```
